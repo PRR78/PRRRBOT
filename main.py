@@ -17,9 +17,9 @@ reload(sys)
 wikipedia.set_lang("fa")
 sys.setdefaultencoding("utf-8")
 
-TOKEN = 'TOKEN'
+TOKEN = '252602938:AAEryMvkmDBqxmhK8l3gtoUkgrvu-WMwhmE'
 bot = telebot.TeleBot(TOKEN)
-is_sudo = 'ADMIN ID'
+is_sudo = '226123856'
 rediss = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 @bot.message_handler(commands=['start'])
@@ -34,7 +34,7 @@ def start(m):
 
 @bot.message_handler(commands=['help'])
 def welcome(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         print 'Send /help'
         rediss.sadd('member', '{}'.format(m.from_user.id))
@@ -45,10 +45,10 @@ def welcome(m):
         bot.send_message(m.chat.id,
         """
 <i>Hello Welcome
-arrow bot Fun Telegram bot</i>
+plus bot Fun Telegram bot</i>
 commands list :
 <code>
-/arrow
+/plus
 /help
 /ping
 /echo [Text]  (Support Markdown *bold* _italic_ `code`)
@@ -95,7 +95,7 @@ forward msg to private Me
 
 
 <b>inline mode</b> :
-<code>@Arrow_robot</code>
+<code>@pplusrbot</code>
 <b>Menu Inline</b>
 
 
@@ -104,17 +104,18 @@ forward msg to private Me
 برای دریافت راهنمای فارسی بنویس
 /helpfa
 سازنده
-@negative
+@PHAE2099
+#negative
         """, parse_mode='HTML', reply_markup=markup)
 
 @bot.message_handler(commands=['helpfa'])
 def helpfa(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         print 'Send /helpfa'
         text = """
 دستورات :
-/arrow
+/plus
 معرفی
 /help
 دستور راهنما
@@ -201,21 +202,21 @@ def callback_inline(call):
     if call.message:
         if call.data == "next":
             markup = types.InlineKeyboardMarkup()
-            arrow = types.InlineKeyboardButton('Arrow\xE2\xAD\x95\xEF\xB8\x8F', callback_data='send_arrow')
+            arrow = types.InlineKeyboardButton('Plus\xE2\xAD\x95\xEF\xB8\x8F', callback_data='send_plus')
             helpp = types.InlineKeyboardButton('Help\xE2\xAD\x95\xEF\xB8\x8F', callback_data='send_help')
-            admin = types.InlineKeyboardButton('Admin arrow\xE2\x9A\xA0\xEF\xB8\x8F', callback_data="admin")
+            admin = types.InlineKeyboardButton('Admin plus\xE2\x9A\xA0\xEF\xB8\x8F', callback_data="admin")
             back = types.InlineKeyboardButton('\xE2\x97\x80\xEF\xB8\x8FBack', callback_data='back')
-            markup.add(arrow, helpp)
+            markup.add(plus, helpp)
             markup.add(admin)
             markup.add(back)
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="commands : list", reply_markup=markup)
             bot.answer_callback_query(callback_query_id=call.id, show_alert=False, text="Next!")
     if call.message:
-        if call.data == "send_arrow":
+        if call.data == "send_plus":
             markup = types.InlineKeyboardMarkup()
             markup.add(types.InlineKeyboardButton('\xE2\x97\x80\xEF\xB8\x8FBack', callback_data='next2'))
-            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="/arrow", reply_markup=markup)
-            bot.answer_callback_query(callback_query_id=call.id, show_alert=True, text="Commands : \n /arrow")
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="/plus", reply_markup=markup)
+            bot.answer_callback_query(callback_query_id=call.id, show_alert=True, text="Commands : \n /plus")
     if call.message:
         if call.data == "send_help":
             markup = types.InlineKeyboardMarkup()
@@ -225,18 +226,18 @@ def callback_inline(call):
     if call.message:
         if call.data == "admin":
             markupp = types.InlineKeyboardMarkup()
-            markupp.add(types.InlineKeyboardButton('\xF0\x9F\x94\xB0Negative\xF0\x9F\x94\xB0', url='https://telegram.me/negative_officiall'))
+            markupp.add(types.InlineKeyboardButton('\xF0\x9F\x94\xB0Negative\xF0\x9F\x94\xB0', url='https://telegram.me/phae2099'))
             markupp.add(types.InlineKeyboardButton('\xE2\x97\x80\xEF\xB8\x8FBack', callback_data='next2'))
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Admins list \xF0\x9F\x94\xB1", reply_markup=markupp)
-            bot.answer_callback_query(callback_query_id=call.id, show_alert=False, text="Admin Arrow Bot")
+            bot.answer_callback_query(callback_query_id=call.id, show_alert=False, text="Admin Plus Bot")
     if call.message:
         if call.data == "next2":
             markup = types.InlineKeyboardMarkup()
-            arrow = types.InlineKeyboardButton('Arrow\xE2\xAD\x95\xEF\xB8\x8F', callback_data='send_arrow')
+            arrow = types.InlineKeyboardButton('Plus\xE2\xAD\x95\xEF\xB8\x8F', callback_data='send_plus')
             helpp = types.InlineKeyboardButton('Help\xE2\xAD\x95\xEF\xB8\x8F', callback_data='send_help')
-            admin = types.InlineKeyboardButton('Admin arrow\xE2\x9A\xA0\xEF\xB8\x8F', callback_data="admin")
+            admin = types.InlineKeyboardButton('Admin plus\xE2\x9A\xA0\xEF\xB8\x8F', callback_data="admin")
             back = types.InlineKeyboardButton('\xE2\x97\x80\xEF\xB8\x8FBack', callback_data='back')
-            markup.add(arrow, helpp)
+            markup.add(plus, helpp)
             markup.add(admin)
             markup.add(back)
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="commands : list", reply_markup=markup)
@@ -287,9 +288,9 @@ def callback_inline(call):
             bot.send_sticker(call.message.chat.id, open('food.jpg'))
     if call.message:
         if call.data == '!admins':
-            bot.send_message(call.message.chat.id, 'Channel : @taylor_team')
-            bot.send_message(call.message.chat.id, 'Admin : @Negative_officiall')
-            bot.send_message(call.message.chat.id, 'github : https://github.com/taylor-team')
+            bot.send_message(call.message.chat.id, 'Channel : @TelePlus')
+            bot.send_message(call.message.chat.id, 'Admin : @PHAE2099')
+            bot.send_message(call.message.chat.id, 'github : ..............')
     if call.message:
         if call.data == "back":
             markup = types.InlineKeyboardMarkup()
@@ -297,10 +298,10 @@ def callback_inline(call):
             markup.add(types.InlineKeyboardButton('Inline \xF0\x9F\x93\x9D', switch_inline_query=''))
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="""
 <i>Hello Welcome
-arrow bot Fun Telegram bot</i>
+plus bot Fun Telegram bot</i>
 commands list :
 <code>
-/arrow
+/plus
 /help
 /ping
 /echo [Text]  (Support Markdown *bold* _italic_ `code`)
@@ -347,7 +348,7 @@ forward msg to private Me
 
 
 <b>inline mode</b> :
-<code>@Arrow_robot</code>
+<code>@pplusrbot</code>
 <b>Menu Inline</b>
 
 
@@ -356,7 +357,8 @@ forward msg to private Me
 برای دریافت راهنمای فارسی بنویس
 /helpfa
 سازنده
-@negative
+@PHAE2099
+#negative
             """, parse_mode='HTML', reply_markup=markup)
             bot.answer_callback_query(callback_query_id=call.id, show_alert=False, text="Backed!")
             return
@@ -365,10 +367,10 @@ forward msg to private Me
 def gif(m):
     idd = m.from_user.id
     if str(idd) not in is_sudo:
-        bot.send_message(m.chat.id, 'Just Sudo @negative_officiall')
+        bot.send_message(m.chat.id, 'Just Sudo @PHAE2099')
         return
     if str(m.from_user.id) == is_sudo:
-        taylor_team = '@taylor_team'
+        TelePlus = '@TelePlus'
         text = m.text.replace('/send', '')
         bot.send_message(taylor_team, '{}'.format(text), parse_mode="Markdown")
         bot.send_message(is_sudo, 'ok')
@@ -438,7 +440,7 @@ def wt(m):
 
 @bot.message_handler(commands=['short'])
 def short(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         try:
             text = m.text.split(' ',1)[1]
@@ -463,7 +465,7 @@ def save(m):
 
 @bot.message_handler(commands=['map'])
 def map(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         try:
             text = m.text.split(" ", 1)[1]
@@ -476,7 +478,7 @@ def map(m):
 
 @bot.message_handler(commands=['arz'])
 def arz(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         url = urllib.urlopen('http://exchange.nalbandan.com/api.php?action=json')
         data = url.read()
@@ -503,7 +505,7 @@ def arz(m):
 
 @bot.message_handler(commands=['spotify'])
 def m(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         try:
             url = urllib.urlopen("https://api.spotify.com/v1/search?limit=1&type=track&q={}".format(m.text.replace('/spotify','')))
@@ -535,7 +537,7 @@ def m(m):
 
 @bot.message_handler(commands=['sc'])
 def s(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         try:
             text = m.text.split(' ',1)[1]
@@ -561,7 +563,7 @@ def s(m):
 
 @bot.message_handler(commands=['news'])
 def m(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         url = urllib.urlopen('http://api.khabarfarsi.net/api/news/latest/1?tid=*&output=json')
         data = url.read()
@@ -584,7 +586,7 @@ def m(m):
 
 @bot.message_handler(regexp='^(/logo) (.*)')
 def log(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         if m.text.split()[1]:
             text = m.text.split()[1]
@@ -593,7 +595,7 @@ def log(m):
 
 @bot.message_handler(regexp='^(/setlink) (.*)')
 def link(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         if m.text.split()[1]:
             if m.chat.type == "group" or m.chat.type == "supergroup":
@@ -609,7 +611,7 @@ def link(m):
 
 @bot.message_handler(commands=['link'])
 def linkget(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         if m.chat.type == "group" or m.chat.type == "supergroup":
             get = rediss.get('{}'.format(m.chat.id))
@@ -687,12 +689,12 @@ def m(m):
             bot.answer_inline_query(m.id, [inline], cache_time=1)
         except KeyError:
             inline = types.InlineQueryResultArticle('1','Error',types.InputTextMessageContent('Error IMDB'))
-    if m.query.split()[0] == 'arrow':
+    if m.query.split()[0] == 'plus':
         fileid = 'BQADBAADKAYAAqTB2Apq3oIp-bQXUgI'
         sticker = types.InlineQueryResultCachedSticker('1',sticker_file_id=fileid)
         gif_id = 'BQADBAAD2AIAAqTB2Aq63iOGp-8HyQI'
-        gif = types.InlineQueryResultCachedGif('2',gif_file_id=gif_id,caption='Arrow Robot Fun\nDeveloper : @Negative')
-        con = types.InlineQueryResultContact('3',phone_number='+98 937 909 7344',first_name='Negative')
+        gif = types.InlineQueryResultCachedGif('2',gif_file_id=gif_id,caption='Plus Robot Fun\nDeveloper : @PHAE2099')
+        con = types.InlineQueryResultContact('3',phone_number='-------',first_name='Poorya')
         bot.answer_inline_query(m.id, [sticker, gif, con])
     if m.query.split()[0] == 'loc':
         try:
@@ -785,31 +787,31 @@ def q(m):
     weatherm = types.InlineKeyboardButton('switch inline \xE2\x9C\x85',switch_inline_query='weather tehran')
     markupweather.add(weatherm)
     loctmp = 'https://www.solarissport.com/skin/frontend/boilerplate/default/images/media/maps.png'
-    loc = types.InlineQueryResultArticle('1',title='loc [name]',input_message_content=types.InputTextMessageContent('<b>@Arrow_robot loc [name]</b>', parse_mode='HTML'), reply_markup=markuploc, description='loc [name]', thumb_url=loctmp)
+    loc = types.InlineQueryResultArticle('1',title='loc [name]',input_message_content=types.InputTextMessageContent('<b>@pplusrbot loc [name]</b>', parse_mode='HTML'), reply_markup=markuploc, description='loc [name]', thumb_url=loctmp)
     imdbtmp = 'http://icons.iconarchive.com/icons/danleech/simple/512/imdb-icon.png'
-    imdb = types.InlineQueryResultArticle('2',title='imdb [name movie]',input_message_content=types.InputTextMessageContent('<b>@Arrow_robot imdb [name movie]</b>', parse_mode='HTML'), reply_markup=markupimdb, description='imdb [name]', thumb_url=imdbtmp)
+    imdb = types.InlineQueryResultArticle('2',title='imdb [name movie]',input_message_content=types.InputTextMessageContent('<b>@pplusrbot imdb [name movie]</b>', parse_mode='HTML'), reply_markup=markupimdb, description='imdb [name]', thumb_url=imdbtmp)
     wikitmp = 'https://image.freepik.com/free-icon/wikipedia-logotype_318-9923.jpg'
-    wiki = types.InlineQueryResultArticle('3',title='wiki [name]',input_message_content=types.InputTextMessageContent('<b>@Arrow_robot wiki [text]</b>', parse_mode='HTML'), reply_markup=markupwiki, description='wiki [text]', thumb_url=wikitmp)
+    wiki = types.InlineQueryResultArticle('3',title='wiki [name]',input_message_content=types.InputTextMessageContent('<b>@pplusrbot wiki [text]</b>', parse_mode='HTML'), reply_markup=markupwiki, description='wiki [text]', thumb_url=wikitmp)
     boldtmp = 'https://image.freepik.com/free-icon/bold--b-in-rounded-square_318-9739.jpg'
-    bold = types.InlineQueryResultArticle('4',title='bold [text]',input_message_content=types.InputTextMessageContent('<b>@Arrow_robot bold [text]</b>', parse_mode='HTML'),reply_markup=markupbold, description='bold [text]', thumb_url=boldtmp)
+    bold = types.InlineQueryResultArticle('4',title='bold [text]',input_message_content=types.InputTextMessageContent('<b>@pplusrbot bold [text]</b>', parse_mode='HTML'),reply_markup=markupbold, description='bold [text]', thumb_url=boldtmp)
     italictmp = 'https://image.freepik.com/free-icon/italic-letter-style-interface-symbol_318-53607.png'
-    italic = types.InlineQueryResultArticle('5',title='italic [text]',input_message_content=types.InputTextMessageContent('<b>@Arrow_robot italic [text]</b>',parse_mode='HTML'),reply_markup=markupitalic,description='italic [text]',thumb_url=italictmp)
+    italic = types.InlineQueryResultArticle('5',title='italic [text]',input_message_content=types.InputTextMessageContent('<b>@pplusrbot italic [text]</b>',parse_mode='HTML'),reply_markup=markupitalic,description='italic [text]',thumb_url=italictmp)
     newstmp = 'http://seattlefreepress.org/wp-content/uploads/2015/11/In-the-news-icon.png'
-    news = types.InlineQueryResultArticle('6',title='news',input_message_content=types.InputTextMessageContent('<b>@Arrow_robot news</b>', parse_mode='HTML'),reply_markup=markupnews, description='news', thumb_url=newstmp)
+    news = types.InlineQueryResultArticle('6',title='news',input_message_content=types.InputTextMessageContent('<b>@pplusrbot news</b>', parse_mode='HTML'),reply_markup=markupnews, description='news', thumb_url=newstmp)
     meantmp = 'http://appratech.net/uploads/posts/2015-03/1426246349_icon320x320.jpg'
-    mean = types.InlineQueryResultArticle('7',title='\xD9\x85\xD8\xB9\xD9\x86\xDB\x8C [text]',input_message_content=types.InputTextMessageContent('<b>@Arrow_robot \xD9\x85\xD8\xB9\xD9\x86\xDB\x8C [text]</b>', parse_mode='HTML'),reply_markup=markupmean, description='\xD9\x85\xD8\xB9\xD9\x86\xDB\x8C [text]', thumb_url=meantmp)
+    mean = types.InlineQueryResultArticle('7',title='\xD9\x85\xD8\xB9\xD9\x86\xDB\x8C [text]',input_message_content=types.InputTextMessageContent('<b>@pplusrbot \xD9\x85\xD8\xB9\xD9\x86\xDB\x8C [text]</b>', parse_mode='HTML'),reply_markup=markupmean, description='\xD9\x85\xD8\xB9\xD9\x86\xDB\x8C [text]', thumb_url=meantmp)
     calctmp = 'http://icons.iconarchive.com/icons/dtafalonso/android-lollipop/256/Calculator-icon.png'
-    calc = types.InlineQueryResultArticle('8',title='calc [Equation]',input_message_content=types.InputTextMessageContent('<b>@Arrow_robot calc [Equation]</b>', parse_mode='HTML'),reply_markup=markupcalc, description='calc [Equation]', thumb_url=calctmp)
+    calc = types.InlineQueryResultArticle('8',title='calc [Equation]',input_message_content=types.InputTextMessageContent('<b>@pplusrbot calc [Equation]</b>', parse_mode='HTML'),reply_markup=markupcalc, description='calc [Equation]', thumb_url=calctmp)
     timetmp = 'http://icons.iconarchive.com/icons/icons8/ios7/512/Time-And-Date-Clock-icon.png'
-    time = types.InlineQueryResultArticle('9',title='time',input_message_content=types.InputTextMessageContent('<b>@Arrow_robot time</b>',parse_mode='HTML'),reply_markup=markuptime,description='time',thumb_url=timetmp)
+    time = types.InlineQueryResultArticle('9',title='time',input_message_content=types.InputTextMessageContent('<b>@pplusrbot time</b>',parse_mode='HTML'),reply_markup=markuptime,description='time',thumb_url=timetmp)
     weathertmp = 'http://www.freeiconspng.com/uploads/weather-icon-13.png'
-    weather = types.InlineQueryResultArticle('10',title='weather [City]',input_message_content=types.InputTextMessageContent('<b>@Arrow_robot weather [City]</b>',parse_mode='HTML'),reply_markup=markupweather,description='weather [City]',thumb_url=weathertmp)
+    weather = types.InlineQueryResultArticle('10',title='weather [City]',input_message_content=types.InputTextMessageContent('<b>@pplusrbot weather [City]</b>',parse_mode='HTML'),reply_markup=markupweather,description='weather [City]',thumb_url=weathertmp)
     bot.answer_inline_query(m.id, [loc, imdb, wiki, bold, italic, news, mean, calc, time, weather])
 
 
 @bot.message_handler(commands=['whois'])
 def whois(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         try:
             cid = m.chat.id
@@ -828,7 +830,7 @@ def whois(m):
 
 @bot.message_handler(commands=['wiki'])
 def m(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         try:
             ny = wikipedia.page("{}".format(m.text.replace('/wiki','')))
@@ -842,7 +844,7 @@ def m(m):
 
 @bot.message_handler(regexp='^(/github) (.*)')
 def git(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         text = m.text.split()[1]
         r = req.get('https://api.github.com/repos/{}'.format(text))
@@ -890,7 +892,7 @@ Stars : <code>{}</code> \xE2\xAD\x90
 def check(m):    
     idd = m.from_user.id
     if str(idd) not in is_sudo:
-        bot.send_message(m.chat.id, 'Just Sudo @negative_officiall')
+        bot.send_message(m.chat.id, 'Just Sudo @PHAE2099')
         return
     if str(m.from_user.id) == is_sudo:
         msm = rediss.scard('member')
@@ -898,7 +900,7 @@ def check(m):
 
 @bot.message_handler(regexp='^(/mean) (.*)')
 def mean(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         text = m.text.split()[1]
         r = req.get('http://api.vajehyab.com/v2/public/?q={}'.format(text))
@@ -906,16 +908,16 @@ def mean(m):
         textx = json_data['data']['text']
         bot.send_message(m.chat.id, textx)
 
-@bot.message_handler(commands=['arrow'])
+@bot.message_handler(commands=['plus'])
 def arrow(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         bot.send_message(m.chat.id, """
-Arrow Fun Telegram bot
-Developer : @negative_officiall
-Channel : @taylor_team
+Plus Fun Telegram bot
+Developer : @PHAE2099
+Channel : @TelePlus
     """)
-        bot.send_document(m.chat.id, open('shot_bow-and-arrow_01.gif'), caption='@Taylor_Team')
+        bot.send_document(m.chat.id, open('shot_bow-and-plus_01.gif'), caption='@TelePlus')
 
 #@bot.message_handler(commands=['bc'])
 #def bc(m):
@@ -931,11 +933,11 @@ def gb(m):
     if str(m.from_user.id) == is_sudo:
         if not m.reply_to_message:
             ban_id = m.text.split()[1]
-            rediss.sadd('banlist_arrow','{}'.format(ban_id))
+            rediss.sadd('banlist_plus','{}'.format(ban_id))
             bot.send_message(m.chat.id, '*Banned*', parse_mode='Markdown')
         if m.reply_to_message:
             ban_id = m.reply_to_message.from_user.id 
-            rediss.sadd('banlist_arrow','{}'.format(ban_id))
+            rediss.sadd('banlist_plus','{}'.format(ban_id))
             bot.send_message(m.chat.id, '*Banned*', parse_mode='Markdown')
 
 @bot.message_handler(commands=['unban'])
@@ -943,11 +945,11 @@ def unban(m):
     if str(m.from_user.id) == is_sudo:
         if not m.reply_to_message:
             unban_id = m.text.split()[1]
-            rediss.srem('banlist_arrow',unban_id)
+            rediss.srem('banlist_plus',unban_id)
             bot.send_message(m.chat.id, '*Unbanned*', parse_mode='Markdown')
         if m.reply_to_message:
             unban_id = m.reply_to_message.from_user.id 
-            rediss.srem('banlist_arrow','{}'.format(unban_id))
+            rediss.srem('banlist_plus','{}'.format(unban_id))
             bot.send_message(m.chat.id, '*Unbanned*', parse_mode='Markdown')
             
 @bot.message_handler(commands=['get'])
@@ -961,7 +963,7 @@ def upload(m):
 
 @bot.message_handler(commands=['code'])
 def code(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         try:
             if m.text.split()[1] == 'base64':
@@ -973,7 +975,7 @@ def code(m):
 
 @bot.message_handler(commands=['decode'])
 def decode(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         try:
             if m.text.split()[1] == 'base64':
@@ -985,7 +987,7 @@ def decode(m):
 
 @bot.message_handler(commands=['uptime'])
 def ss(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         tmt = m.from_user.id
         if str(tmt) == is_sudo:
@@ -994,7 +996,7 @@ def ss(m):
 
 @bot.message_handler(commands=['cap'])
 def mess(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         try:
             if m.reply_to_message.document:
@@ -1026,7 +1028,7 @@ def mess(m):
 
 @bot.message_handler(commands=['ping'])
 def ping(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         bot.send_chat_action(m.chat.id, 'typing')
         bot.send_message(m.chat.id, '*pong :D* \xF0\x9F\x86\x99', parse_mode='Markdown')
@@ -1039,7 +1041,7 @@ def cap(m):
         bot.send_message(m.chat.id, 'Kicked {}'.format(text))
         return
     if str(m.from_user.id) not in is_sudo:
-        bot.send_message(m.chat.id, 'Just Admin arrow')
+        bot.send_message(m.chat.id, 'Just Admin plus')
         return
 
 @bot.message_handler(commands=['kick'])
@@ -1054,32 +1056,32 @@ def leave(m):
     if str(m.from_user.id) == is_sudo:
         bot.leave_chat(m.chat.id)
     if str(m.from_user.id) not in is_sudo:
-        bot.send_message(m.chat.id, 'Just Admin arrow')
+        bot.send_message(m.chat.id, 'Just Admin plus')
 
 @bot.message_handler(regexp='^(/voice) (.*)')
 def voice(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         urllib.urlretrieve("http://tts.baidu.com/text2audio?lan=en&ie=UTF-8&text={}&".format(m.text.replace('/voice', '')), "voice.ogg")
         bot.send_voice(m.chat.id, open('voice.ogg'))
 
 @bot.message_handler(commands=['bold'])
 def bold(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         text1 = m.text.replace('/bold', '')
         bot.send_message(m.chat.id, '<b>{}</b>'.format(text1), parse_mode="HTML")
 
 @bot.message_handler(commands=['italic'])
 def italic(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         text = m.text.replace('/italic', '')
         bot.send_message(m.chat.id, '<i>{}</i>'.format(text), parse_mode="HTML")
 
 @bot.message_handler(commands=['cmd'])
 def bin(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         if str(m.from_user.id) == is_sudo:
             textt = m.text.replace('/cmd', '')
@@ -1088,14 +1090,14 @@ def bin(m):
 
 @bot.message_handler(commands=['id'])
 def m(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         if m.reply_to_message:
             bot.send_message(m.chat.id, m.reply_to_message.from_user.id)
 
 @bot.message_handler(regexp='^(/echo) (.*)')
 def echo(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         bot.send_message(m.chat.id, m.text.replace('/echo', ''), parse_mode='Markdown')
 
@@ -1108,7 +1110,7 @@ def echo(m):
 
 @bot.message_handler(regexp='^(/imdb) (.*)')
 def m(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         try:
             r = urllib.urlopen('http://www.omdbapi.com/?t={}&'.format(m.text.replace('/imdb','')))
@@ -1142,7 +1144,7 @@ def m(m):
 
 @bot.message_handler(regexp='^(/git) (.*)')
 def gif(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         text = m.text.split()[1]
         r = req.get('https://api.github.com/users/{}'.format(text))
@@ -1174,7 +1176,7 @@ def sendadmin(m):
 
 @bot.message_handler(regexp='^(/ip) (.*)')
 def ip(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         text = m.text.split()[1]
         r = req.get('http://ip-api.com/json/{}?fields=262143'.format(text))
@@ -1196,14 +1198,14 @@ def ip(m):
 
 @bot.message_handler(commands=['sticker'])
 def sticker(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         urllib.urlretrieve("https://assets.imgix.net/examples/blueberries.jpg?blur=500&fit=crop&w=1200&h=500&trimcolor=ffffff&txt={}&txtsize=150&txtalign=middle%2C%20center&txtline=3".format(m.text.replace('/sticker', '')), "sticker.png")
         bot.send_sticker(m.chat.id, open('sticker.png'))
 
 @bot.message_handler(commands=['tophoto'])
 def m(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         try:
             if m.reply_to_message.sticker:
@@ -1219,7 +1221,7 @@ def m(m):
 
 @bot.message_handler(commands=['tosticker'])
 def m(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         try:
             if m.reply_to_message.photo:
@@ -1236,7 +1238,7 @@ def m(m):
 
 @bot.message_handler(commands=['time'])
 def sticker(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         url = "http://api.gpmod.ir/time/"
         response = urllib.urlopen(url)
@@ -1279,7 +1281,7 @@ fulldate : {}
 
 @bot.message_handler(commands=['dog'])
 def d(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         text = m.text.replace('/dog', '')
         urllib.urlretrieve("http://dogr.io/{}.png?split=false&s.png".format(text), "s.png")
@@ -1287,7 +1289,7 @@ def d(m):
 
 @bot.message_handler(commands=['qr'])
 def qr(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         text = m.text.replace('/qr', '')
         urllib.urlretrieve("https://api.qrserver.com/v1/create-qr-code/?size=1200x800&data={}&bgcolor=ffff00&".format(text), "qr.png")
@@ -1295,7 +1297,7 @@ def qr(m):
 
 @bot.message_handler(commands=['pic'])
 def logo(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         urllib.urlretrieve("https://source.unsplash.com/random", "img.jpg")
         bot.send_chat_action(m.chat.id, 'upload_photo')
@@ -1303,14 +1305,14 @@ def logo(m):
 
 @bot.message_handler(commands=['wallpaper'])
 def wallpaper(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         urllib.urlretrieve("https://source.unsplash.com/1600x900", "wallpaper.jpg")
         bot.send_photo(m.chat.id, open('wallpaper.jpg'), caption='Wallpaper 1600x900')
 
 @bot.message_handler(commands=['info'])
 def info(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         if not m.reply_to_message:
             try:
@@ -1337,20 +1339,20 @@ def info(m):
 
 @bot.message_handler(commands=['food'])
 def food(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         urllib.urlretrieve("https://source.unsplash.com/category/food", "food.jpg")
         bot.send_sticker(m.chat.id, open('food.jpg'))
 
 @bot.message_handler(commands=['tehran'])
 def tr(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         bot.send_location(m.chat.id, 35.6891975, 51.3889736)
 
 @bot.message_handler(commands=['loc'])
 def loc(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         try:
             url = urllib.urlopen('http://maps.googleapis.com/maps/api/geocode/json?address={}'.format(m.text.replace('/loc','')))
@@ -1367,7 +1369,7 @@ def loc(m):
 
 @bot.message_handler(commands=['tr'])
 def tre(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20160119T111342Z.fd6bf13b3590838f.6ce9d8cca4672f0ed24f649c1b502789c9f4687a&format=plain&lang=fa&text={}&".format(m.text.replace('/tr', ''))
         response = urllib.urlopen(url)
@@ -1378,14 +1380,14 @@ def tre(m):
 
 @bot.message_handler(regexp='^(/webshot) (.*)')
 def web(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         urllib.urlretrieve("http://api.screenshotmachine.com/?key=b645b8&size=X&url={}".format(m.text.replace('/webshot', '')), "web.jpg")
         bot.send_photo(m.chat.id, open('web.jpg'))
 
 @bot.message_handler(regexp='^(/calc) (.*)')
 def web(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         try:
             encodee = urllib.quote_plus(m.text.replace('/calc', ''))
@@ -1409,7 +1411,7 @@ def new(m):
 
 @bot.message_handler(content_types=['sticker'])
 def m(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         if m.chat.type == 'private':
             text = m.sticker.emoji
@@ -1417,7 +1419,7 @@ def m(m):
 
 @bot.message_handler(content_types=['text', 'audio', 'document', 'photo', 'sticker', 'video', 'voice', 'location'])
 def us(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         if m.chat.type == "private":
             if m.forward_from:
