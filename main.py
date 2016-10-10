@@ -24,7 +24,7 @@ rediss = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 @bot.message_handler(commands=['start'])
 def start(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         ids = m.chat.id
         bot.send_message(m.chat.id, '\xF0\x9F\x98\x85 ok welcome send /help')
@@ -202,7 +202,7 @@ def callback_inline(call):
     if call.message:
         if call.data == "next":
             markup = types.InlineKeyboardMarkup()
-            arrow = types.InlineKeyboardButton('Plus\xE2\xAD\x95\xEF\xB8\x8F', callback_data='send_plus')
+            plus = types.InlineKeyboardButton('Plus\xE2\xAD\x95\xEF\xB8\x8F', callback_data='send_plus')
             helpp = types.InlineKeyboardButton('Help\xE2\xAD\x95\xEF\xB8\x8F', callback_data='send_help')
             admin = types.InlineKeyboardButton('Admin plus\xE2\x9A\xA0\xEF\xB8\x8F', callback_data="admin")
             back = types.InlineKeyboardButton('\xE2\x97\x80\xEF\xB8\x8FBack', callback_data='back')
@@ -233,7 +233,7 @@ def callback_inline(call):
     if call.message:
         if call.data == "next2":
             markup = types.InlineKeyboardMarkup()
-            arrow = types.InlineKeyboardButton('Plus\xE2\xAD\x95\xEF\xB8\x8F', callback_data='send_plus')
+            plus = types.InlineKeyboardButton('Plus\xE2\xAD\x95\xEF\xB8\x8F', callback_data='send_plus')
             helpp = types.InlineKeyboardButton('Help\xE2\xAD\x95\xEF\xB8\x8F', callback_data='send_help')
             admin = types.InlineKeyboardButton('Admin plus\xE2\x9A\xA0\xEF\xB8\x8F', callback_data="admin")
             back = types.InlineKeyboardButton('\xE2\x97\x80\xEF\xB8\x8FBack', callback_data='back')
@@ -372,12 +372,12 @@ def gif(m):
     if str(m.from_user.id) == is_sudo:
         TelePlus = '@TelePlus'
         text = m.text.replace('/send', '')
-        bot.send_message(taylor_team, '{}'.format(text), parse_mode="Markdown")
+        bot.send_message(TelePlus, '{}'.format(text), parse_mode="Markdown")
         bot.send_message(is_sudo, 'ok')
 
 @bot.message_handler(commands=['weather'])
 def wt(m):
-    banlist = rediss.sismember('banlist_arrow', '{}'.format(m.from_user.id))
+    banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         try:
             icons = {'01d': '🌞',
@@ -909,7 +909,7 @@ def mean(m):
         bot.send_message(m.chat.id, textx)
 
 @bot.message_handler(commands=['plus'])
-def arrow(m):
+def plus(m):
     banlist = rediss.sismember('banlist_plus', '{}'.format(m.from_user.id))
     if str(banlist) == 'False':
         bot.send_message(m.chat.id, """
@@ -1163,7 +1163,7 @@ def gif(m):
             avatar_url = json_data['avatar_url']
             urllib.urlretrieve("{}".format(avatar_url), "git.png")
             bot.send_sticker(m.chat.id, open('git.png'))
-            bot.send_message(m.chat.id, 'Name : <b>{}</b>\nType : <b>{}</b>\nCompany : <b>{}</b>\nblog : <code>{}</code>\nlocation : <b>{}</b>\nbio : <i>{}</i>\n\nUrl : <code>{}</code>\nfollowers : <code>{}</code>\nfollowing : <code>{}</code>\nRepos : <code>{}</code>\n\xE2\x97\xBC \xE2\x97\xBB \xE2\x97\xBC \xE2\x97\xBB \xE2\x97\xBC \xE2\x97\xBB \xE2\x97\xBC \n@taylor_team'.format(name,typee,company,blog,location,bio,url_html,followers,following,public_repos), parse_mode='HTML')
+            bot.send_message(m.chat.id, 'Name : <b>{}</b>\nType : <b>{}</b>\nCompany : <b>{}</b>\nblog : <code>{}</code>\nlocation : <b>{}</b>\nbio : <i>{}</i>\n\nUrl : <code>{}</code>\nfollowers : <code>{}</code>\nfollowing : <code>{}</code>\nRepos : <code>{}</code>\n\xE2\x97\xBC \xE2\x97\xBB \xE2\x97\xBC \xE2\x97\xBB \xE2\x97\xBC \xE2\x97\xBB \xE2\x97\xBC \n@TelePlus'.format(name,typee,company,blog,location,bio,url_html,followers,following,public_repos), parse_mode='HTML')
         if 'message' in json_data:
             bot.send_message(m.chat.id, 'Error \n/git [username]')
             return
@@ -1301,7 +1301,7 @@ def logo(m):
     if str(banlist) == 'False':
         urllib.urlretrieve("https://source.unsplash.com/random", "img.jpg")
         bot.send_chat_action(m.chat.id, 'upload_photo')
-        bot.send_photo(m.chat.id, open('img.jpg'), caption='@Arrow_robot')
+        bot.send_photo(m.chat.id, open('img.jpg'), caption='@pplusrbot')
 
 @bot.message_handler(commands=['wallpaper'])
 def wallpaper(m):
