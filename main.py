@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import telebot
+import PRRRBOT
 from telebot import types
 from telebot import util
 import sys
