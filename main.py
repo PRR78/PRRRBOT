@@ -17,7 +17,7 @@ reload(sys)
 wikipedia.set_lang("fa")
 sys.setdefaultencoding("utf-8")
 
-TOKEN = '252602938:AAEryMvkmDBqxmhK8l3gtoUkgrvu-WMwhmE'
+TOKEN = '252602938:AAEVs-cSoZPvjr2DTl3qjQyPdi5M9opm_qM'
 bot = telebot.TeleBot(TOKEN)
 is_sudo = '226123856'
 rediss = redis.StrictRedis(host='localhost', port=6379, db=0)
